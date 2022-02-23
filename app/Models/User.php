@@ -43,6 +43,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that are assign admin to users.
+     * 
+     * @var bool<true, false>
+     */
+    const ADMIN_USER    = 'true';
+    const AUTHOR_USER   = 'false';
+
+    /**
      * Sets a one-to-many relationship to posts table.
      * 
      * @return array

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('content');
             $table->timestamps();
 
-            $table->foreing('author_id')->refrences('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 

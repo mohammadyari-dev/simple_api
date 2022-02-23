@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('category_id')->unsigned();
             $table->integer('post_id')->unsigned();
 
-            $table->foreing('category_id')->refrences('id')->on('categories');
-            $table->foreing('post_id')->refrences('id')->on('posts');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
