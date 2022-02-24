@@ -32,7 +32,7 @@ trait ApiResponser
      */
     protected function errorResponse($message, $code)
     {
-        return response()->json([$message, $code], $code);
+        return response()->json(['error' => $message, 'code' => $code], $code);
     }
 
     /**
@@ -44,7 +44,7 @@ trait ApiResponser
      */
     protected function showAll(Collection $collection, $code = 200)
     {
-        return $this->successResponse($collection, $code);
+        return $this->successResponse(['data' => $collection], $code);
     }
 
     /**
