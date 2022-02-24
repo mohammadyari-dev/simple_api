@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 /**
  * Users routes
  */
-Route::resource('users', UserController::class)->except(['create, edit']);
+Route::resource('users', UserController::class)->except(['create', 'edit']);
