@@ -48,7 +48,7 @@ class UserController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  object  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -60,13 +60,11 @@ class UserController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  object  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         // Validate user data
         $request->validate([
             'email'      => 'email:rfc|unique:users,email,' . $user->id,
@@ -103,7 +101,7 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  object  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
