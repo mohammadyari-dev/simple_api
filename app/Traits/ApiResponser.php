@@ -54,7 +54,7 @@ trait ApiResponser
      * @param int $code
      * @return array
      */
-    protected function showOne(Model $instance, $code)
+    protected function showOne(Model $instance, $code = 200)
     {
         return $this->successResponse($instance, $code);
     }
