@@ -53,8 +53,6 @@ class UserController extends ApiController
      */
     public function show(User $user)
     {
-        // $user = User::findOrFail($id);
-
         return $this->showOne($user);
     }
 
