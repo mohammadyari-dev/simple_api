@@ -27,7 +27,22 @@ class UserController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        // Validate user data
+        $request->validate([
+            'first_name' => 'required',
+            'last_name'  => 'required',
+            'email'      => 'email:rfc|unique:App\Models\User,email',
+            'password'   => 'required|min:6|confirmed'
+        ]);
+
+        // Add new user to database
+        $data               = $request->all();
+        $data['password']   = bcrypt($request->password);
+        $data['admin']      = User::AUTHOR_USER;
+
+        $user               = User::create($data);
+
+        return $this->showOne($user, 201);
     }
 
     /**
