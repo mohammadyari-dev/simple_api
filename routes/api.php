@@ -17,4 +17,15 @@ use Illuminate\Support\Facades\Route;
 /**
  * Users routes
  */
-Route::resource('users', UserController::class)->except(['create', 'edit']);
+Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+Route::resource('users.posts', 'User\UserPostController', ['except' => ['create', 'show', 'edit']]);
+
+/**
+ * Posts routes
+ */
+Route::resource('posts', 'Post\PostController', ['only' => ['index', 'show']]);
+
+/**
+ * Categories routes
+ */
+Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);

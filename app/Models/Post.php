@@ -10,6 +10,18 @@ class Post extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'user_id',
+    ];
+
+    /**
      * Sets many-to-many relationship to categories table.
      * 
      * @return array

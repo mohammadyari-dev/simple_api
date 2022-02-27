@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
 class UserController extends ApiController
@@ -38,7 +39,7 @@ class UserController extends ApiController
         // Add new user to database
         $data               = $request->all();
         $data['password']   = bcrypt($request->password);
-        $data['admin']      = User::AUTHOR_USER;
+        $data['admin']      = User::REGULAR_USER;
 
         $user               = User::create($data);
 

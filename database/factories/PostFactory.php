@@ -18,9 +18,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'author_id'     => User::all()->random()->id,
+            'user_id'       => User::where('admin', 'true')->get()->random()->id,
             'title'         => $this->faker->word(),
-            'slug'         => $this->faker->slug(),
+            'slug'          => $this->faker->slug(),
             'content'       => $this->faker->text()
         ];
     }
