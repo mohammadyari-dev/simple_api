@@ -55,8 +55,6 @@ class User extends Authenticatable
 
     /**
      * Sets a one-to-many relationship to posts table.
-     * 
-     * @return array
      */
     public function posts()
     {

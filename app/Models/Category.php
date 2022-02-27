@@ -10,9 +10,14 @@ class Category extends Model
     use HasFactory;
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = ['pivot'];
+
+    /**
      * Sets many-to-many relationship to posts table.
-     * 
-     * @return Array
      */
     public function posts()
     {

@@ -23,8 +23,6 @@ class Post extends Model
 
     /**
      * Sets many-to-many relationship to categories table.
-     * 
-     * @return array
      */
     public function categories()
     {
@@ -33,8 +31,6 @@ class Post extends Model
 
     /**
      * Sets one-to-many relationship to users table.
-     * 
-     * @return array
      */
     public function user()
     {
