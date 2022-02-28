@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\ApiController;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostCategoryController extends ApiController
@@ -12,52 +14,11 @@ class PostCategoryController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post)
     {
-        //
-    }
+        $posts = $post->categories;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->showAll($posts);
     }
 
     /**
@@ -67,9 +28,12 @@ class PostCategoryController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post, Category $category)
     {
-        //
+        // attach, sync, syncWithoutDetaching
+        $post->categories()->syncWithoutDetaching([$category->id]);
+
+        return $this->showAll($post->categories);
     }
 
     /**
@@ -78,8 +42,14 @@ class PostCategoryController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post, Category $category)
     {
-        //
+        if (!$post->categories()->find($category->id)) {
+            return $this->errorResponse("The specified category is not a category of this post", 404);
+        }
+
+        $post->categories()->detach($category->id);
+
+        return $this->showAll($post->categories);
     }
 }
