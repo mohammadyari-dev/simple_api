@@ -25,6 +25,7 @@ Route::resource('users.categories', 'User\UserCategoryController', ['only' => ['
  * Posts routes
  */
 Route::resource('posts', 'Post\PostController', ['only' => ['index', 'show']]);
+Route::resource('posts.categories', 'Post\PostCategoryController', ['only' => ['index', 'update', 'destroy']]);
 
 /**
  * Categories routes
