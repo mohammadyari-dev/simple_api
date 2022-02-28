@@ -17,6 +17,17 @@ class Category extends Model
     protected $hidden = ['pivot'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+    ];
+
+    /**
      * Sets many-to-many relationship to posts table.
      */
     public function posts()

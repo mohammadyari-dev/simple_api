@@ -81,7 +81,7 @@ class UserController extends ApiController
             $user->last_name = $request->last_name;
         }
 
-        if ($request->has('emaill') && $user->email != $request->email) {
+        if ($request->has('email') && $user->email != $request->email) {
             $user->email = $request->email;
         }
 
@@ -107,6 +107,10 @@ class UserController extends ApiController
      */
     public function destroy(User $user)
     {
+        if (!$user->posts->isEmpty()) {
+            return $this->errorResponse("You can't remove user, the user currently has posts", 409);
+        }
+
         $user->delete();
 
         return $this->showOne($user);

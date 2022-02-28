@@ -31,3 +31,5 @@ Route::resource('posts.categories', 'Post\PostCategoryController', ['only' => ['
  * Categories routes
  */
 Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
+Route::resource('categories.posts', 'Category\CategoryPostController', ['only' => ['index']]);
+Route::resource('categories.users', 'Category\CategoryUserController', ['only' => ['index']]);
