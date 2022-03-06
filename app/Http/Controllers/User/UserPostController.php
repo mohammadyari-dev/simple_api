@@ -9,11 +9,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * Crud posts for user
+ * @author Mohammad.Y <mhd.yari021@gmail.com>
+ */
 class UserPostController extends ApiController
 {
     /**
+     * Constructor
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     */
+    public function __construct()
+    {
+        // Prevent access routes
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
+
+    /**
      * Display a listing of the resource.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function index(User $user)
@@ -25,8 +40,9 @@ class UserPostController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, User $user)
@@ -49,9 +65,10 @@ class UserPostController extends ApiController
 
     /**
      * Update the specified resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user, Post $post)
@@ -88,8 +105,9 @@ class UserPostController extends ApiController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user, Post $post)
@@ -104,6 +122,7 @@ class UserPostController extends ApiController
 
     /**
      * Check user access post
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param \App\Models\User  $user
      * @param \App\Models\Post  $post
      * @return HttpException\Response

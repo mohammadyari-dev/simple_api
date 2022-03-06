@@ -7,28 +7,63 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Authectication
+ * @author Mohammad.Y <mhd.yari021@gmail.com>
+ */
 class LoginController extends ApiController
 {
     /**
-     * Handle an authentication attempt.
-     *
+     * Constructor
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     */
+    public function __construct()
+    {
+        // Prevent access routes
+        $this->middleware('auth:sanctum')->only(['logout']);
+    }
+    /**
+     * Authenticated users
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function authenticate(Request $request, User $user)
+    public function authenticate(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
+        $credentials = $request->validate([
+            'email' => ['required', 'email:rfc'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'admin' => 'true']))) {
-            $request->session()->regenerate();
-            $user = User::find(Auth::id());
-
-            return $this->showOne($user);
+        if (!Auth::attempt($credentials)) {
+            return $this->errorResponse("The provided credentials do not match our records.", 401);
         }
 
-        return $this->errorResponse("The provided credentials do not match our records.", 401);
+        $user = User::where('email', $request['email'])->firstOrFail();
+        $token = $user->createToken('auth-token')->plainTextToken;
+        $data = [
+            'auth_token' => $token,
+            'token_type' => 'Bearer'
+        ];
+
+        return $this->tokenResponse($data, 201);
+    }
+
+    /**
+     * Logout
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the current request...
+        $request->user()->currentAccessToken()->delete();
+
+        $data = [
+            'message' => 'Tokens Revoked',
+        ];
+
+        return $this->tokenResponse($data);
     }
 }

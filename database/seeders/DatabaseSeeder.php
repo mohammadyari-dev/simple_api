@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return void
      */
     public function run()

@@ -13,7 +13,7 @@ class UserFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return array<string, mixed>
      */
     public function definition()
@@ -31,7 +31,7 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the model's email address should be unverified.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return static
      */
     public function unverified()

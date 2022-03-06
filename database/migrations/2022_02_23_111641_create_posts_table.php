@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return void
      */
     public function up()
@@ -27,7 +27,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return void
      */
     public function down()

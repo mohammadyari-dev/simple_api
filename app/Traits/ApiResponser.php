@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * @author Mohammad.Y
+ * API convert method
  * @author Mohammad.Y <mhd.yari021@gmail.com>
  */
 trait ApiResponser
 {
     /**
      * Show response data
-     * @author Mohammad.Y
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param array $data
      * @param int $code
      * @return array
@@ -25,7 +25,7 @@ trait ApiResponser
 
     /**
      * Show error response
-     * @author Mohammad.Y
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param string $message
      * @param int $code
      * @return array
@@ -37,7 +37,7 @@ trait ApiResponser
 
     /**
      * Show all data
-     * @author Mohammad.Y
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param array $collection
      * @param int $code
      * @return array
@@ -49,7 +49,7 @@ trait ApiResponser
 
     /**
      * Show single data
-     * @author Mohammad.Y
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param array $instance
      * @param int $code
      * @return array
@@ -57,5 +57,17 @@ trait ApiResponser
     protected function showOne(Model $instance, $code = 200)
     {
         return $this->successResponse($instance, $code);
+    }
+
+    /**
+     * Show token response
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param array $data
+     * @param int $code
+     * @return array
+     */
+    protected function tokenResponse($data, $code = 200)
+    {
+        return response()->json([$data, $code]);
     }
 }

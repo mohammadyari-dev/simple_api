@@ -12,7 +12,7 @@ class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return array<string, mixed>
      */
     public function definition()

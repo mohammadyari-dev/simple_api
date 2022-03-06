@@ -29,6 +29,7 @@ class Category extends Model
 
     /**
      * Sets many-to-many relationship to posts table.
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      */
     public function posts()
     {

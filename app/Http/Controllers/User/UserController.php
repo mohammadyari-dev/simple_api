@@ -6,11 +6,24 @@ use App\Models\User;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
+/**
+ * Crud users
+ * @author Mohammad.Y <mhd.yari021@gmail.com>
+ */
 class UserController extends ApiController
 {
     /**
+     * Constructor
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     */
+    public function __construct()
+    {
+        // Prevent access routes
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
+    /**
      * Display a listing of the resource.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -22,7 +35,7 @@ class UserController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -48,8 +61,8 @@ class UserController extends ApiController
 
     /**
      * Display the specified resource.
-     *
-     * @param  object  $user
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -59,9 +72,9 @@ class UserController extends ApiController
 
     /**
      * Update the specified resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
-     * @param  object  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -101,8 +114,8 @@ class UserController extends ApiController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  object  $user
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

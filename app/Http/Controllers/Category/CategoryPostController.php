@@ -10,7 +10,7 @@ class CategoryPostController extends ApiController
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function index(Category $category)

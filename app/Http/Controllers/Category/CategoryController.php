@@ -7,11 +7,25 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+/**
+ * Categories crud
+ * @author Mohammad.Y <mhd.yari021@gmail.com>
+ */
 class CategoryController extends ApiController
 {
     /**
+     * Constructor
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     */
+    public function __construct()
+    {
+        // Prevent access routes
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
+
+    /**
      * Display a listing of the resource.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -23,7 +37,7 @@ class CategoryController extends ApiController
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -45,7 +59,7 @@ class CategoryController extends ApiController
 
     /**
      * Display the specified resource.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
@@ -56,7 +70,7 @@ class CategoryController extends ApiController
 
     /**
      * Update the specified resource in storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
@@ -91,12 +105,14 @@ class CategoryController extends ApiController
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return $this->showOne($category);
     }
 }
