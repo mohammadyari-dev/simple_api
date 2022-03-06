@@ -45,14 +45,13 @@ class UserController extends ApiController
         $request->validate([
             'first_name' => 'required',
             'last_name'  => 'required',
-            'email'      => 'email:rfc|unique:users,email',
+            'email'      => 'required|email:rfc|unique:users,email',
             'password'   => 'required|min:6|confirmed'
         ]);
 
         // Add new user to database
         $data               = $request->all();
         $data['password']   = bcrypt($request->password);
-        $data['admin']      = User::REGULAR_USER;
 
         $user               = User::create($data);
 
