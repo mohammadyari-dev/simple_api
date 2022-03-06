@@ -61,4 +61,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * Check user admin
+     * @return Bolean
+     */
+    public function isAdministrator()
+    {
+        return $this->admin == User::ADMIN_USER;
+    }
 }
