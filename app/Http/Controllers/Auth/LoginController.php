@@ -57,6 +57,38 @@ class LoginController extends ApiController
     }
 
     /**
+     * Register new user
+     * @author Mohammad.Y <mhd.yari021@gmail.com>
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        // Validate user data
+        $request->validate([
+            'first_name' => 'required',
+            'last_name'  => 'required',
+            'email'      => 'email:rfc|unique:users,email',
+            'password'   => 'required|min:6|confirmed'
+        ]);
+
+        // Add new user to database
+        $data               = $request->all();
+        $data['password']   = bcrypt($request->password);
+        $data['admin']      = User::REGULAR_USER;
+
+        $user               = User::create($data);
+
+        $token = $user->createToken('auth-token')->plainTextToken;
+        $data = [
+            'auth_token' => $token,
+            'token_type' => 'Bearer'
+        ];
+
+        return $this->tokenResponse($data, 201);
+    }
+
+    /**
      * Logout
      * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
