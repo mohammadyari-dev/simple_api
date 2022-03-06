@@ -20,7 +20,7 @@ class PostCategoryController extends ApiController
     public function __construct()
     {
         // Prevent access routes
-        $this->middleware('auth:sanctum')->except(['index']);
+        $this->middleware(['auth:sanctum', 'abilities:admin'])->except(['index']);
     }
 
     /**

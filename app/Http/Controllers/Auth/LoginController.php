@@ -40,7 +40,14 @@ class LoginController extends ApiController
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
-        $token = $user->createToken('auth-token')->plainTextToken;
+        $admin = $user->isAdministrator();
+        $tokenAbilities = [];
+        if ($admin) {
+            $tokenAbilities = [
+                'admin'
+            ];
+        }
+        $token = $user->createToken('auth-token', $tokenAbilities)->plainTextToken;
         $data = [
             'auth_token' => $token,
             'token_type' => 'Bearer'

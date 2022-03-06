@@ -19,7 +19,7 @@ class UserController extends ApiController
     public function __construct()
     {
         // Prevent access routes
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware(['auth:sanctum', 'abilities:admin'])->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
