@@ -68,7 +68,7 @@ class LoginController extends ApiController
         $request->validate([
             'first_name' => 'required',
             'last_name'  => 'required',
-            'email'      => 'email:rfc|unique:users,email',
+            'email'      => 'required|email:rfc|unique:users,email',
             'password'   => 'required|min:6|confirmed'
         ]);
 
