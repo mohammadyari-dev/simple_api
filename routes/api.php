@@ -42,5 +42,5 @@ Route::resource('categories.users', 'Category\CategoryUserController', ['only' =
  * @author Mohammad.Y <mhd.yari021@gmail.com>
  */
 Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
-Route::post('/register', 'Auth\LoginController@authenticate')->name('register');
+Route::post('/register', 'Auth\LoginController@register')->name('register');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
