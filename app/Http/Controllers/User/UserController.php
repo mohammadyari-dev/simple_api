@@ -25,6 +25,15 @@ class UserController extends ApiController
      * Display a listing of the resource.
      * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @return \Illuminate\Http\Response
+     * @OA\GET(
+     *     path="/users",
+     *     tags={"Users"},
+     *     summary="List of users",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Data"
+     *     )
+     * )
      */
     public function index()
     {
@@ -38,6 +47,46 @@ class UserController extends ApiController
      * @author Mohammad.Y <mhd.yari021@gmail.com>
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/users",
+     *     tags={"Users"},
+     *     summary="Adds a new user - with oneOf examples",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="first_name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="last_name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password_confirmation",
+     *                     type="string"
+     *                 ),
+     *                 example={"first_name": "Melvin", "last_name": "Gamache", "email": "melvin@gamache.net", "password": "123456", "password_confirmation": "123456"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Examples(example="result", value=    {"first_name": "Behnam", "last_name": "Yari", "email": "melvin@gmail.com", "updated_at": "2022-03-09T12:16:37.000000Z", "created_at": "2022-03-09T12:16:37.000000Z", "id": 305}, summary="An result json."),
+     *         )
+     *     )
+     * ) 
      */
     public function store(Request $request)
     {
@@ -75,6 +124,22 @@ class UserController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/users/{id}",
+     *     tags={"Users"},
+     *     summary="Updates a user",
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="An int value."),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * ) 
      */
     public function update(Request $request, User $user)
     {

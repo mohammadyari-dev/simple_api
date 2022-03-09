@@ -10,12 +10,107 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Get list of users",
-                "description": "Returns list of users",
-                "operationId": "index",
+                "summary": "List of users",
+                "description": "Display a listing of the resource.",
+                "operationId": "1ac7a967d2134b8502ddb9f7a2addc4e",
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "Data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Adds a new user - with oneOf examples",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "726f8e83a310fb2ff5b279441b206e77",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "first_name": "Melvin",
+                                    "last_name": "Gamache",
+                                    "email": "melvin@gamache.net",
+                                    "password": "123456",
+                                    "password_confirmation": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "An result json.",
+                                        "value": {
+                                            "first_name": "Behnam",
+                                            "last_name": "Yari",
+                                            "email": "melvin@gmail.com",
+                                            "updated_at": "2022-03-09T12:16:37.000000Z",
+                                            "created_at": "2022-03-09T12:16:37.000000Z",
+                                            "id": 305
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Updates a user",
+                "description": "Update the specified resource in storage.",
+                "operationId": "7521891788bb39bc9a09a95e5eaca89c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "An int value.",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }
